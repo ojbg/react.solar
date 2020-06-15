@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+  frontend:
+    container_name: ${COMPOSE_PROJECT_NAME}_frontend
+    build:
+      context: ./frontend
+    ports:
+      - '${FRONTEND_PORT}:${FRONTEND_CONTAINER_PORT}'
