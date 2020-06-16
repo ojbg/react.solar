@@ -1,6 +1,7 @@
 .App {
-  background-color: #282c34;
+  display:grid;  
+  grid-template-rows: auto 1fr;
+  background-color: #121112;
   color: white;
-  min-height: 100vh;
-  text-align: center;
+  min-height: 100vh;  
 }
