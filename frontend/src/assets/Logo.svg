@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="5.8835397mm"
+   height="5.8708396mm"
+   viewBox="0 0 5.8835397 5.8708396"
+   version="1.1"
+   id="svg845"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="interTrustLogo.svg">
+  <defs
+     id="defs839" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.4478333"
+     inkscape:cx="-11.545881"
+     inkscape:cy="-19.98706"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1918"
+     inkscape:window-height="1008"
+     inkscape:window-x="-7"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata842">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-96.215235,-119.46203)">
+    <g
+       id="g66"
+       transform="matrix(0.26458333,0,0,0.26458333,96.131098,119.45621)">
+      <g
+         id="g38">
+        <g
+           id="g16">
+          <g
+             id="g14">
+            <g
+               id="g12">
+              <path
+                 d="M 22.555,11.141 C 22.555,5 17.579,0.022 11.44,0.022 5.297,0.022 0.318,5 0.318,11.141 c 0,4.115 2.236,7.708 5.56,9.63 V 18.107 L 5.894,18.095 C 3.851,16.466 2.541,13.956 2.541,11.14 c 0,-4.914 3.982,-8.896 8.898,-8.896 4.913,0 8.892,3.981 8.892,8.896 0,2.808 -1.301,5.312 -3.334,6.941 v 2.689 c 3.321,-1.92 5.558,-5.514 5.558,-9.629 z"
+                 id="path2"
+                 inkscape:connector-curvature="0" />
+              <path
+                 d="m 14.774,16.92 v 0 c 1.993,-1.154 3.334,-3.311 3.334,-5.779 0,-2.134 -1.002,-4.033 -2.56,-5.254 l -1.369,1.75 c 1.039,0.815 1.707,2.081 1.707,3.504 0,2.072 -1.42,3.814 -3.338,4.306 v 0.008 6.756 l 0.069,-0.014 c 0.743,-0.078 1.464,-0.23 2.155,-0.447 h 0.002 z"
+                 id="path4"
+                 inkscape:connector-curvature="0" />
+              <path
+                 d="m 10.325,15.447 v 0 C 8.407,14.955 6.99,13.213 6.99,11.141 6.99,9.718 7.657,8.453 8.696,7.637 L 7.325,5.887 c -1.559,1.221 -2.558,3.12 -2.558,5.254 0,2.468 1.342,4.625 3.335,5.779 v 0 4.83 0 c 0.712,0.225 1.454,0.377 2.22,0.455 h 0.003 z"
+                 id="path6"
+                 inkscape:connector-curvature="0" />
+              <circle
+                 cx="11.438"
+                 cy="5.5819998"
+                 r="1.359"
+                 id="circle8" />
+              <circle
+                 cx="11.438"
+                 cy="11.141"
+                 r="2.2249999"
+                 id="circle10" />
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
