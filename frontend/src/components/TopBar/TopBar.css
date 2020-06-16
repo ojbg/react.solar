@@ -1,0 +1,15 @@
+.top_bar {
+  display: flex;
+  padding: 0.5rem;
+}
+
+.app_logo {
+  fill: white;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.app_title {
+    margin-left: 0.3rem;
+    font-weight: 600;
+}
