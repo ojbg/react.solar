@@ -69,8 +69,9 @@ const TotalPower = ({ totalPower }) => {
   }
 
   useEffect(() => {
-    const [, date] = new Date().toLocaleString('en-US').split(',');
-    const newPower = [date, totalPower];
+    const date = new Date().toLocaleString('en-US');
+    const [,time] = date.split(',');
+    const newPower = [time, totalPower];
     setUpdated(date);
     setPowerData((prevPower) => [...prevPower, newPower]);
   }, [totalPower]);
