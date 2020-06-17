@@ -27,10 +27,10 @@ function getISOTime(hours = 24) {
 
 const Forecast = () => {
   const title = 'WEATHER FORECAST';
-
   const [updated, setUpdated] = useState('');
   const [solarFlux, setSolarFlux] = useState([]);
   const [skyCoverage, setSkyCoverage] = useState([]);
+  const [isError, setIsError] = useState(false);
 
   const charts = [
     {
@@ -126,6 +126,7 @@ const Forecast = () => {
       };
 
       try {
+        setIsError(false);
         const results = await ApiForecast.getWeatherForecast(params);
 
         for (let i = 0; i < results.data.entries.length; i++) {
@@ -136,7 +137,7 @@ const Forecast = () => {
         }
 
         return data;
-      } catch (error) {}
+      } catch (error) {setIsError(true);}
     }
 
     async function getSkyCloudCoverage(time) {
@@ -155,6 +156,7 @@ const Forecast = () => {
       };
 
       try {
+        setIsError(false);
         const results = await ApiForecast.getWeatherForecast(params);
 
         for (let i = 0; i < results.data.entries.length; i++) {
@@ -166,7 +168,7 @@ const Forecast = () => {
         }
 
         return data;
-      } catch (error) {}
+      } catch (error) {setIsError(true);}
     }
 
     async function getData() {
@@ -190,6 +192,7 @@ const Forecast = () => {
 
   return (
     <Card title={title} footer={`Last Update: ${updated}`}>
+      {isError && <p className="error">API Error</p>}
       <div className='forecast'>
         {charts.map((chart) => (
           <div key={chart.id} className='forecast_chart'>

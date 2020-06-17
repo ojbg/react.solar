@@ -4,12 +4,13 @@ import config from 'config';
 
 const SolarPanels = ({ getTotalPower }) => {
   const title = 'SOLAR PANELS';
-
   const [panels, setPanels] = useState([]);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const MAX_PANELS = config.maxPanels;
 
+    // Mock server API to get solar panels data
     function getStatus() {
       const status = ['available', 'service', 'unavailable', 'fault'];
 
@@ -30,11 +31,10 @@ const SolarPanels = ({ getTotalPower }) => {
       return status[3];
     }
 
-    function getPanels() {
-      setPanels([]);
+    async function getPanels() {
+      const panels = [];
       let totalPower = 0;
 
-      // Mock server API for solar power panels data
       for (let i = 0; i < MAX_PANELS; i++) {
         let voltage = 0;
         let current = 0;
@@ -61,24 +61,41 @@ const SolarPanels = ({ getTotalPower }) => {
           power: `${power} W`,
           status,
         };
-
-        setPanels((prevPanels) => [...prevPanels, newPanel]);
+        panels.push(newPanel);
         totalPower += power;
-      }   
+      }
 
-      getTotalPower(totalPower);
+      return { panels, totalPower };
+    }
+    //
+
+    async function update() {
+      setPanels([]);
+
+      try {
+        setIsError(false);
+        const { panels, totalPower } = await getPanels();
+        setPanels(panels);
+        getTotalPower(totalPower);
+      } catch (error) {
+        setIsError(true);
+      }
     }
 
-    getPanels();
+    update();
     const interval = setInterval(() => {
-      getPanels();
+      update();
     }, config.panelsTimer);
     return () => clearInterval(interval);
   }, [getTotalPower]);
 
   return (
     <div className='solar_panels'>
-      <div className='text_bold'>{title}</div>
+      <div className='text_bold'>
+        <span>{title}</span>
+        {isError && <span className='error'>API Error</span>}
+      </div>
+
       <div className='solar_panels_group'>
         {panels.map((panel) => {
           return (
