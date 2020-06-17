@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './TotalPower.css';
 import config from 'config';
-import Panel from 'components/Panel';
+import Card from 'components/Card';
 import { Chart } from 'react-google-charts';
 
 const TotalPower = ({ totalPower }) => {
@@ -76,7 +76,7 @@ const TotalPower = ({ totalPower }) => {
   }, [totalPower]);
 
   return (
-    <Panel title={title} footer={`Last Update: ${updated}`}>
+    <Card title={title} footer={`Last Update: ${updated}`}>
       <div className='total_power'>
         <div className='total_power_info'>
           <div className='power'>
@@ -98,7 +98,7 @@ const TotalPower = ({ totalPower }) => {
           />
         </div>
       </div>
-    </Panel>
+    </Card>
   );
 };
 

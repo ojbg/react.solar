@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import config from 'config';
-import Panel from 'components/Panel';
+import Card from 'components/Card';
 import './Forecast.css';
 import { Chart } from 'react-google-charts';
 import ApiForecast from 'services/ApiForecast';
@@ -189,7 +189,7 @@ const Forecast = () => {
   }, []);
 
   return (
-    <Panel title={title} footer={`Last Update: ${updated}`}>
+    <Card title={title} footer={`Last Update: ${updated}`}>
       <div className='forecast'>
         {charts.map((chart) => (
           <div key={chart.id} className='forecast_chart'>
@@ -205,7 +205,7 @@ const Forecast = () => {
           </div>
         ))}
       </div>
-    </Panel>
+    </Card>
   );
 };
 

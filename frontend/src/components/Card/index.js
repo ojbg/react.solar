@@ -1,7 +1,7 @@
 import React from 'react';
-import './Panel.css';
+import './Card.css';
 
-const Panel = ({ title, footer, children }) => {
+const Card = ({ title, footer, children }) => {
   return (
     <div className='panel'>
       <div className='text_bold'>{title}</div>
@@ -11,4 +11,4 @@ const Panel = ({ title, footer, children }) => {
   );
 };
 
-export default Panel;
+export default Card;
