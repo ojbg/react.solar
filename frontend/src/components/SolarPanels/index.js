@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './SolarPanels.css';
+import Card from 'components/Card';
 import config from 'config';
+
+const status = ['available', 'service', 'unavailable', 'fault'];
 
 const SolarPanels = ({ getTotalPower }) => {
   const title = 'SOLAR PANELS';
@@ -12,8 +15,6 @@ const SolarPanels = ({ getTotalPower }) => {
 
     // Mock server API to get solar panels data
     function getStatus() {
-      const status = ['available', 'service', 'unavailable', 'fault'];
-
       const rnd = Math.random();
 
       if (rnd >= 0.3) {
@@ -96,6 +97,8 @@ const SolarPanels = ({ getTotalPower }) => {
         {isError && <span className='error'>API Error</span>}
       </div>
 
+      <SolarMonitor panels={panels} />
+
       <div className='solar_panels_group'>
         {panels.map((panel) => {
           return (
@@ -123,6 +126,28 @@ const SolarPanel = ({ status, name, voltage, power }) => {
         <span>{power}</span>
       </span>
     </div>
+  );
+};
+
+const SolarMonitor = ({ panels }) => {
+  function getTotalStatus(status) {
+    return panels.filter((panel) => panel.status === status).length;
+  }
+
+  return (
+    <Card>
+      <div className='monitor'>
+        {status.map((item, index) => {
+          return (
+            <div key={index} className='monitor_panel'>
+              <span className={item} />
+              <span>{item.toUpperCase()}</span>
+              <span>{getTotalStatus(item)}</span>
+            </div>
+          );
+        })}
+      </div>
+    </Card>
   );
 };
 
