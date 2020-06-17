@@ -7,13 +7,13 @@ const config = {
     weatherForecastUrl: 'point', 
     maxPanels: 30,
     forecastTimer: 1000*60*5,
-    panelsTimer: 1000,
+    panelsTimer: 10000,
     charts: {
       backgroundColor: 'transparent',
       lineColor: '#56d4fa',
       textColor: '#FFF',
       trend: {
-        maxpoints:3
+        maxPoints:60
       }
     }    
 }
