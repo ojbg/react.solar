@@ -1,15 +1,15 @@
 .total_power {
   display: grid;
   align-items: center;
-  grid-template-rows: auto 1fr;  
+  grid-template-rows: auto 1fr;
 }
 
 .total_power_info {
   text-align: center;
 }
 
-.total_power_chart{
-  display:grid;
+.total_power_chart {
+  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   align-content: center;
 }
@@ -19,6 +19,16 @@
   font-size: 3rem;
 }
 
-.type {
-  font-size: 0.8rem;
+.trend {
+  font-size: 1rem;
+}
+
+.trend-green:before {
+  content: '\0025B2';
+  color: green;
+}
+
+.trend-red:before {
+  content: '\0025BC';
+  color: red;
 }
