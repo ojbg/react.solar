@@ -46,7 +46,21 @@ const TotalPower = ({ totalPower }) => {
   ];
 
   function formatPower(power) {
-    return `${(power / 1e3).toFixed(2)} KW`;
+    if(isNaN(power)) return 'Not Valid';
+
+    const units = [
+      {value: 1e3,symbol: 'KW'},
+      {value: 1e6,symbol: 'MW'},
+      {value: 1e9,symbol: 'GW'}
+    ];
+   
+    for(let i=units.length-1;i>=0;i--) {              
+      if(power >= units[i].value){
+        const scaled = power/units[i].value;        
+        return `${scaled.toFixed(2)} ${units[i].symbol}`;
+      }      
+    }   
+    return `${power.toFixed(2)} W`;
   }
 
   function getPreviousPower() {
@@ -69,6 +83,8 @@ const TotalPower = ({ totalPower }) => {
   }
 
   useEffect(() => {
+    if(isNaN(totalPower)) return;
+
     const date = new Date().toLocaleString('en-US');
     const [,time] = date.split(',');
     const newPower = [time, totalPower];
