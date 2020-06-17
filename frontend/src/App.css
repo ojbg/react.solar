@@ -1,7 +1,11 @@
 .App {
-  display:grid;  
+  display: grid;
   grid-template-rows: auto 1fr;
   background-color: #121112;
   color: white;
-  min-height: 100vh;  
+  min-height: 100vh;
+}
+
+.text_bold {
+  font-weight: 600;
 }

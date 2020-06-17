@@ -1,0 +1,24 @@
+.total_power {
+  display: grid;
+  align-items: center;
+  grid-template-rows: auto 1fr;  
+}
+
+.total_power_info {
+  text-align: center;
+}
+
+.total_power_chart{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  align-content: center;
+}
+
+.power {
+  font-weight: 600;
+  font-size: 3rem;
+}
+
+.type {
+  font-size: 0.8rem;
+}

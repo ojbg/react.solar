@@ -1,0 +1,12 @@
+.panel {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background-color: #343e4d;
+  color: #f7f7f7;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.3rem;
+}
+
+.panel_footer {
+  font-size: 0.7rem;
+}

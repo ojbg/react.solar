@@ -1,0 +1,43 @@
+.solar_panels {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  padding: 0.5rem 0;
+}
+
+.solar_panels_group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.5rem;
+}
+
+.solar_panel {
+  display: inline-grid;
+  grid-template-columns: 0.3rem 1fr;
+  background-color: #343e4d;
+  color: #f7f7f7;
+  border-radius: 0.2rem;
+  gap: 0.5rem;
+}
+
+.panel_data {
+  display: inline-grid;
+  align-content: center;
+  grid-auto-flow: column;
+  font-size: 1.2rem;
+}
+
+.available {
+  background-color: green;
+}
+
+.service {
+  background-color: yellow;
+}
+
+.unavailable {
+  background-color: red;
+}
+
+.fault {
+  background-color: orange;
+}
