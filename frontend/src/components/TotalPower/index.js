@@ -3,33 +3,36 @@ import './TotalPower.css';
 import config from 'config';
 import Card from 'components/Card';
 import { Chart } from 'react-google-charts';
+import { TotalPower as constants } from 'constants/TotalPower';
 
 const TotalPower = ({ totalPower }) => {
-  const title = 'TOTAL POWER';
+  const title = constants.title;
   const [updated, setUpdated] = useState('');
-  const [powerData, setPowerData] = useState([['time', 'Total Power (W)']]);
+  const [powerData, setPowerData] = useState([
+    [constants.chart.xTitle, constants.chart.yTitle],
+  ]);
 
   const chartOptions = {
     chartType: 'LineChart',
     legend: 'none',
     backgroundColor: config.charts.backgroundColor,
     series: {
-      0: { color: '#f7f7f7' },
+      0: { color: constants.chart.lineColor },
     },
     vAxis: {
-      title: 'Watts',
-      titleTextStyle: { color: '#f7f7f7' },
-      gridlines: { color: 'transparent' },
-      baselineColor: 'transparent',
-      textStyle: { color: '#f7f7f7' },
+      title: constants.chart.xAxisTitle,
+      titleTextStyle: { color: constants.chart.textColor },
+      gridlines: { color: constants.chart.gridColor },
+      baselineColor: constants.chart.gridColor,
+      textStyle: { color: constants.chart.textColor },
       format: 'short',
     },
     hAxis: {
-      gridlines: { color: 'transparent' },
-      baselineColor: 'transparent',
-      textStyle: { color: '#f7f7f7' },
+      gridlines: { color: constants.chart.gridColor },
+      baselineColor: constants.chart.gridColor,
+      textStyle: { color: constants.chart.textColor },
     },
-    loaderMessage: 'Loading...',
+    loaderMessage: constants.messages.loading,
   };
 
   const chartEvents = [
@@ -46,21 +49,21 @@ const TotalPower = ({ totalPower }) => {
   ];
 
   function formatPower(power) {
-    if(isNaN(power)) return 'Not Valid';
+    if (isNaN(power)) return constants.messages.notValid;
 
     const units = [
-      {value: 1e3,symbol: 'KW'},
-      {value: 1e6,symbol: 'MW'},
-      {value: 1e9,symbol: 'GW'}
+      { value: 1e3, symbol: constants.units.kilo },
+      { value: 1e6, symbol: constants.units.mega },
+      { value: 1e9, symbol: constants.units.giga },
     ];
-   
-    for(let i=units.length-1;i>=0;i--) {              
-      if(power >= units[i].value){
-        const scaled = power/units[i].value;        
+
+    for (let i = units.length - 1; i >= 0; i--) {
+      if (power >= units[i].value) {
+        const scaled = power / units[i].value;
         return `${scaled.toFixed(2)} ${units[i].symbol}`;
-      }      
-    }   
-    return `${power.toFixed(2)} W`;
+      }
+    }
+    return `${power.toFixed(2)} ${constants.units.watts}`;
   }
 
   function getPreviousPower() {
@@ -83,17 +86,17 @@ const TotalPower = ({ totalPower }) => {
   }
 
   useEffect(() => {
-    if(isNaN(totalPower)) return;
+    if (isNaN(totalPower)) return;
 
-    const date = new Date().toLocaleString('en-US');
-    const [,time] = date.split(',');
+    const date = new Date().toLocaleString(config.locale);
+    const [, time] = date.split(',');
     const newPower = [time, totalPower];
     setUpdated(date);
     setPowerData((prevPower) => [...prevPower, newPower]);
   }, [totalPower]);
 
   return (
-    <Card title={title} footer={`Last Update: ${updated}`}>
+    <Card title={title} footer={`${constants.messages.lastUpdate} ${updated}`}>
       <div className='total_power'>
         <div className='total_power_info'>
           <div className='power'>
@@ -101,7 +104,10 @@ const TotalPower = ({ totalPower }) => {
             <span className={comparePower()}></span>
           </div>
           <div>
-            <span>Previous: {formatPower(getPreviousPower())}</span>
+            <span>
+              {`${constants.messages.previous} 
+              ${formatPower(getPreviousPower())}`}
+            </span>
           </div>
         </div>
 

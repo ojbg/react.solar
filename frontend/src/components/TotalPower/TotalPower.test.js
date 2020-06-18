@@ -7,6 +7,12 @@ describe('TotalPower component', () => {
         render(<TotalPower />);        
     });
 
+    test('display card header', () => {
+        const expected = 'TOTAL POWER';
+        render (<TotalPower />);
+        expect(screen.getByText(expected)).toBeInTheDocument();
+    });
+
     test('displays formated power value when prop is passed', async() => {
         const totalPower = 1780;
         const expected = '1.78 KW';
