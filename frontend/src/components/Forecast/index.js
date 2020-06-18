@@ -6,26 +6,6 @@ import { Chart } from 'react-google-charts';
 import Api from 'services/ApiForecast';
 import { Forecast as constants } from 'constants/Forecast';
 
-function getISOTime(hours = 24) {
-  const start = new Date();
-  // Fix UTC to use native date ISO conversion
-  const startISO = new Date(
-    start.getTime() - start.getTimezoneOffset() * 6e4
-  ).toISOString();
-
-  const end = new Date(start);
-  end.setHours(end.getHours() + hours);
-
-  const endISO = new Date(
-    end.getTime() - end.getTimezoneOffset() * 6e4
-  ).toISOString();
-
-  return {
-    start: startISO,
-    end: endISO,
-  };
-}
-
 const Forecast = () => {
   const title = constants.title;
   const [updated, setUpdated] = useState('');
@@ -174,6 +154,26 @@ const Forecast = () => {
       }
     }
 
+    function getISOTime(hours = 24) {
+      const start = new Date();
+      // Fix UTC to use native date ISO conversion
+      const startISO = new Date(
+        start.getTime() - start.getTimezoneOffset() * 6e4
+      ).toISOString();
+    
+      const end = new Date(start);
+      end.setHours(end.getHours() + hours);
+    
+      const endISO = new Date(
+        end.getTime() - end.getTimezoneOffset() * 6e4
+      ).toISOString();
+    
+      return {
+        start: startISO,
+        end: endISO,
+      };
+    }
+
     async function getData() {
       const { start, end } = getISOTime();
       const time = { start, end };
@@ -189,7 +189,7 @@ const Forecast = () => {
 
     const interval = setInterval(() => {
       getData();
-    }, config.forecastTimer);
+    }, constants.forecastTimer);
     return () => clearInterval(interval);
   }, []);
 
