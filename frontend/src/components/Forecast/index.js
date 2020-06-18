@@ -3,7 +3,7 @@ import config from 'config';
 import Card from 'components/Card';
 import './Forecast.css';
 import { Chart } from 'react-google-charts';
-import ApiForecast from 'services/ApiForecast';
+import Api from 'services/ApiForecast';
 import { Forecast as constants } from 'constants/Forecast';
 
 function getISOTime(hours = 24) {
@@ -126,7 +126,7 @@ const Forecast = () => {
 
       try {
         setIsError(false);
-        const results = await ApiForecast.getWeatherForecast(params);
+        const results = await Api.getWeatherForecast(params);
 
         for (let i = 0; i < results.data.entries.length; i++) {
           const time = new Date(results.data.entries[i].axes.time).getHours();
@@ -158,7 +158,7 @@ const Forecast = () => {
 
       try {
         setIsError(false);
-        const results = await ApiForecast.getWeatherForecast(params);
+        const results = await Api.getWeatherForecast(params);
 
         for (let i = 0; i < results.data.entries.length; i++) {
           const time = new Date(results.data.entries[i].axes.time).getHours();
