@@ -3,7 +3,9 @@ const SolarPanels = {
   status: ['available', 'service', 'unavailable', 'fault'],
   messages: {
       apiError: 'API Error'
-  }
+  },
+  maxPanels: 30,   
+  panelsTimer: 10000   
 };
 
 export { SolarPanels };

@@ -6,9 +6,7 @@ const config = {
     apiUrl: 'http://api.planetos.com/v1/datasets/bom_access-g_global_40km/',
     weatherForecastUrl: 'point', 
     locale: 'en-US',
-    maxPanels: 30,
-    forecastTimer: 1000*60*5,
-    panelsTimer: 10000    
+    forecastTimer: 1000*60*5
 }
 
 export default config;

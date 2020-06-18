@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './SolarPanels.css';
 import Card from 'components/Card';
-import config from 'config';
+import Api from 'services/ApiPanels';
 import { SolarPanels as constants } from 'constants/SolarPanels';
-
-const status = constants.status;
 
 const SolarPanels = ({ getTotalPower }) => {
   const title = constants.title;
@@ -12,69 +10,12 @@ const SolarPanels = ({ getTotalPower }) => {
   const [isError, setIsError] = useState(false);
 
   useEffect(() => {  
-    // Mock server API to get solar panels data
-    function getStatus() {
-      const rnd = Math.random();
-
-      if (rnd >= 0.3) {
-        return status[0];
-      }
-
-      if (rnd < 0.3 && rnd >= 0.2) {
-        return status[1];
-      }
-
-      if (rnd < 0.2 && rnd >= 0.1) {
-        return status[2];
-      }
-
-      return status[3];
-    }
-
-    async function getPanels() {
-      const panels = [];
-      let totalPower = 0;
-
-      for (let i = 0; i < config.maxPanels; i++) {
-        let voltage = 0;
-        let current = 0;
-        let power = 0;
-        const status = getStatus();
-        const MAX_VOLTAGE = 48;
-        const MAX_CURRENT = 10;
-        const DECIMALS = 2;
-
-        if (status !== 'available') {
-          voltage = 0;
-          current = 0;
-          power = 0;
-        } else {
-          voltage = Number((Math.random() * MAX_VOLTAGE).toFixed(DECIMALS));
-          current = Number((Math.random() * MAX_CURRENT).toFixed(DECIMALS));
-          power = Number((voltage * current).toFixed(DECIMALS));
-        }
-
-        const newPanel = {
-          id: i + 1,
-          name: 'P',
-          voltage: `${voltage} v`,
-          power: `${power} W`,
-          status,
-        };
-        panels.push(newPanel);
-        totalPower += power;
-      }
-
-      return { panels, totalPower };
-    }
-    //
-
     async function update() {
       setPanels([]);
 
       try {
         setIsError(false);
-        const { panels, totalPower } = await getPanels();
+        const { panels, totalPower } = await Api.getPanelsInfo();
         setPanels(panels);
         getTotalPower(totalPower);
       } catch (error) {
@@ -85,7 +26,7 @@ const SolarPanels = ({ getTotalPower }) => {
     update();
     const interval = setInterval(() => {
       update();
-    }, config.panelsTimer);
+    }, constants.panelsTimer);
     return () => clearInterval(interval);
   }, [getTotalPower]);
 
@@ -131,6 +72,8 @@ const SolarPanel = ({ status, name, voltage, power }) => {
 };
 
 const SolarMonitor = ({ panels }) => {
+  const status = constants.status;
+  
   function getTotalStatus(status) {
     return panels.filter((panel) => panel.status === status).length;
   }
