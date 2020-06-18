@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './SolarPanels.css';
 import Card from 'components/Card';
 import config from 'config';
+import { SolarPanels as constants } from 'constants/SolarPanels';
 
-const status = ['available', 'service', 'unavailable', 'fault'];
+const status = constants.status;
 
 const SolarPanels = ({ getTotalPower }) => {
-  const title = 'SOLAR PANELS';
+  const title = constants.title;
   const [panels, setPanels] = useState([]);
   const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
-    const MAX_PANELS = config.maxPanels;
-
+  useEffect(() => {  
     // Mock server API to get solar panels data
     function getStatus() {
       const rnd = Math.random();
@@ -36,7 +35,7 @@ const SolarPanels = ({ getTotalPower }) => {
       const panels = [];
       let totalPower = 0;
 
-      for (let i = 0; i < MAX_PANELS; i++) {
+      for (let i = 0; i < config.maxPanels; i++) {
         let voltage = 0;
         let current = 0;
         let power = 0;
@@ -94,7 +93,9 @@ const SolarPanels = ({ getTotalPower }) => {
     <div className='solar_panels'>
       <div className='text_bold'>
         <span>{title}</span>
-        {isError && <span className='error'>API Error</span>}
+        {isError && (
+          <span className='error'>{constants.messages.ApiError}</span>
+        )}
       </div>
 
       <SolarMonitor panels={panels} />
