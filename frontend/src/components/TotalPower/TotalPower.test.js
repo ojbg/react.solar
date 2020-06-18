@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import TotalPower from 'components/TotalPower';
+import { TotalPower as constants } from 'constants/TotalPower';
 
 describe('TotalPower component', () => {
   test('render component without errors', () => {
@@ -8,7 +9,7 @@ describe('TotalPower component', () => {
   });
 
   test('display card header', () => {
-    const expected = 'TOTAL POWER';
+    const expected = constants.title;
     render(<TotalPower />);
     expect(screen.getByText(expected)).toBeInTheDocument();
   });
