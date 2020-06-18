@@ -37,6 +37,7 @@ const Forecast = {
     solarFlux: { var: 'av_swsfcdown', count: 9, interval: null, refTime: true },
     sky: { var: 'av_ttl_cld', count: 9, refTime: true },
   },
+  forecastTimer: 1000*60*5
 };
 
 export { Forecast };
