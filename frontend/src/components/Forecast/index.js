@@ -4,6 +4,7 @@ import Card from 'components/Card';
 import './Forecast.css';
 import { Chart } from 'react-google-charts';
 import ApiForecast from 'services/ApiForecast';
+import { Forecast as constants } from 'constants/Forecast';
 
 function getISOTime(hours = 24) {
   const start = new Date();
@@ -26,7 +27,7 @@ function getISOTime(hours = 24) {
 }
 
 const Forecast = () => {
-  const title = 'WEATHER FORECAST';
+  const title = constants.title;
   const [updated, setUpdated] = useState('');
   const [solarFlux, setSolarFlux] = useState([]);
   const [skyCoverage, setSkyCoverage] = useState([]);
@@ -36,93 +37,91 @@ const Forecast = () => {
     {
       id: 1,
       type: 'LineChart',
-      loaderMessage: 'Loading...',
-      title: 'VDDSF(W/m2)',
-      toolTip: 'Visible Diffuse Downward Solar Flux',
+      loaderMessage: constants.messages.loading,
+      title: constants.charts.solarFlux.title,
+      toolTip: constants.charts.solarFlux.titleToolTip,
       data: solarFlux,
       options: {
         legend: 'none',
         hAxis: {
-          title: 'Hours',
+          title: constants.charts.solarFlux.xAxisTitle,
           titleTextStyle: {
-            color: config.charts.textColor,
+            color: constants.charts.solarFlux.textColor,
           },
           textStyle: {
-            color: config.charts.textColor,
+            color: constants.charts.solarFlux.textColor,
           },
         },
         vAxis: {
-          title: 'W/m2',
+          title: constants.charts.solarFlux.yAxisTitle,
           titleTextStyle: {
-            color: config.charts.textColor,
+            color: constants.charts.solarFlux.textColor,
           },
           viewWindow: {
             min: 0,
           },
           textStyle: {
-            color: config.charts.textColor,
+            color: constants.charts.solarFlux.textColor,
           },
-          baselineColor: config.charts.textColor,
+          baselineColor: constants.charts.solarFlux.textColor,
         },
         curveType: 'function',
-        backgroundColor: config.charts.backgroundColor,
-        colors: [config.charts.lineColor],
+        backgroundColor: constants.charts.solarFlux.backgroundColor,
+        colors: [constants.charts.solarFlux.lineColor],
       },
     },
     {
       id: 2,
       type: 'ColumnChart',
-      loaderMessage: 'Loading...',
-      title: 'Sky cloud coverage',
+      loaderMessage: constants.messages.loading,
+      title: constants.charts.sky.title,
       toolTip: '',
       data: skyCoverage,
       options: {
         legend: 'none',
         hAxis: {
-          title: 'Hours',
+          title: constants.charts.sky.xAxisTitle,
           titleTextStyle: {
-            color: config.charts.textColor,
+            color: constants.charts.sky.textColor,
           },
           textStyle: {
-            color: config.charts.textColor,
+            color: constants.charts.sky.textColor,
           },
         },
         vAxis: {
-          title: '%',
+          title: constants.charts.sky.yAxisTitle,
           titleTextStyle: {
-            color: config.charts.textColor,
+            color: constants.charts.sky.textColor,
           },
           textStyle: {
-            color: config.charts.textColor,
+            color: constants.charts.sky.textColor,
           },
-          baselineColor: config.charts.textColor,
+          baselineColor: constants.charts.sky.textColor,
         },
-        backgroundColor: config.charts.backgroundColor,
-        colors: [config.charts.lineColor],
+        backgroundColor: constants.charts.sky.backgroundColor,
+        colors: [constants.charts.sky.lineColor],
       },
     },
   ];
 
   useEffect(() => {
-    const position = {
-      latitude: -50.5,
-      longitude: 49.5,
-    };
-
     async function getSolarFlux(time) {
       const data = [];
-      data.push(['Hour', 'VDDSF']);
+      data.push([
+        constants.charts.solarFlux.xTitle,
+        constants.charts.solarFlux.yTitle,
+      ]);
 
       const params = {
-        lon: position.longitude,
-        lat: position.latitude,
-        var: 'av_swsfcdown',
-        count: 9,
+        lon: constants.position.longitude,
+        lat: constants.position.latitude,
+        var: constants.api.solarFlux.var,
+        count: constants.api.solarFlux.count,
         start: time.start,
         end: time.end,
-        reftime_recent: true,
+        reftime_recent: constants.api.solarFlux.refTime,
         apikey: config.apiKey,
-        interval: null,
+        interval: constants.api.solarFlux.interval,
       };
 
       try {
@@ -137,21 +136,23 @@ const Forecast = () => {
         }
 
         return data;
-      } catch (error) {setIsError(true);}
+      } catch (error) {
+        setIsError(true);
+      }
     }
 
     async function getSkyCloudCoverage(time) {
       const data = [];
-      data.push(['Hour', 'SCC']);
+      data.push([constants.charts.sky.xTitle, constants.charts.sky.yTitle]);
 
       const params = {
-        lon: position.longitude,
-        lat: position.latitude,
-        var: 'av_ttl_cld',
-        count: 9,
+        lon: constants.position.longitude,
+        lat: constants.position.latitude,
+        var: constants.api.sky.var,
+        count: constants.api.sky.count,
         start: time.start,
         end: time.end,
-        reftime_recent: true,
+        reftime_recent: constants.api.sky.refTime,
         apikey: config.apiKey,
       };
 
@@ -168,7 +169,9 @@ const Forecast = () => {
         }
 
         return data;
-      } catch (error) {setIsError(true);}
+      } catch (error) {
+        setIsError(true);
+      }
     }
 
     async function getData() {
@@ -179,7 +182,7 @@ const Forecast = () => {
       const skyCoverage = await getSkyCloudCoverage(time);
       setSkyCoverage(skyCoverage);
 
-      setUpdated(new Date().toLocaleString('en-US'));
+      setUpdated(new Date().toLocaleString(config.locale));
     }
 
     getData();
@@ -191,8 +194,8 @@ const Forecast = () => {
   }, []);
 
   return (
-    <Card title={title} footer={`Last Update: ${updated}`}>
-      {isError && <p className="error">API Error</p>}
+    <Card title={title} footer={`${constants.messages.lastUpdate} ${updated}`}>
+      {isError && <p className='error'>{constants.messages.apiError}</p>}
       <div className='forecast'>
         {charts.map((chart) => (
           <div key={chart.id} className='forecast_chart'>

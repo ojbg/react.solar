@@ -15,7 +15,7 @@ const TotalPower = ({ totalPower }) => {
   const chartOptions = {
     chartType: 'LineChart',
     legend: 'none',
-    backgroundColor: config.charts.backgroundColor,
+    backgroundColor: constants.chart.backgroundColor,
     series: {
       0: { color: constants.chart.lineColor },
     },
@@ -39,7 +39,7 @@ const TotalPower = ({ totalPower }) => {
     {
       eventName: 'ready',
       callback({ chartWrapper }) {
-        if (powerData.length > config.charts.trend.maxPoints) {
+        if (powerData.length > constants.chart.trend.maxPoints) {
           const data = Array.from(powerData);
           data.splice(1, 1);
           setPowerData(data);

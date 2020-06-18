@@ -8,15 +8,7 @@ const config = {
     locale: 'en-US',
     maxPanels: 30,
     forecastTimer: 1000*60*5,
-    panelsTimer: 10000,
-    charts: {
-      backgroundColor: 'transparent',
-      lineColor: '#56d4fa',
-      textColor: '#FFF',
-      trend: {
-        maxPoints:60
-      }
-    }    
+    panelsTimer: 10000    
 }
 
 export default config;

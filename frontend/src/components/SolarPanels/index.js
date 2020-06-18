@@ -94,7 +94,7 @@ const SolarPanels = ({ getTotalPower }) => {
       <div className='text_bold'>
         <span>{title}</span>
         {isError && (
-          <span className='error'>{constants.messages.ApiError}</span>
+          <span className='error'>{constants.messages.apiError}</span>
         )}
       </div>
 

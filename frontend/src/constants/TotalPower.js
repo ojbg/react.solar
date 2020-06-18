@@ -7,6 +7,8 @@ const TotalPower = {
     lineColor: '#f7f7f7',
     textColor: '#f7f7f7',
     gridColor: 'transparent',
+    backgroundColor: 'transparent',
+    trend: { maxPoints: 60 },
   },
   messages: {
     loading: 'Loading...',
