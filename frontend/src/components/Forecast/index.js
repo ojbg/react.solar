@@ -97,8 +97,8 @@ const Forecast = () => {
         lat: constants.position.latitude,
         var: constants.api.solarFlux.var,
         count: constants.api.solarFlux.count,
-        start: time.start,
-        end: time.end,
+        // start: time.start,
+        // end: time.end,
         reftime_recent: constants.api.solarFlux.refTime,
         apikey: config.apiKey,
         interval: constants.api.solarFlux.interval,
@@ -130,8 +130,8 @@ const Forecast = () => {
         lat: constants.position.latitude,
         var: constants.api.sky.var,
         count: constants.api.sky.count,
-        start: time.start,
-        end: time.end,
+        // start: time.start,
+        // end: time.end,
         reftime_recent: constants.api.sky.refTime,
         apikey: config.apiKey,
       };
@@ -160,14 +160,14 @@ const Forecast = () => {
       const startISO = new Date(
         start.getTime() - start.getTimezoneOffset() * 6e4
       ).toISOString();
-    
+
       const end = new Date(start);
       end.setHours(end.getHours() + hours);
-    
+
       const endISO = new Date(
         end.getTime() - end.getTimezoneOffset() * 6e4
       ).toISOString();
-    
+
       return {
         start: startISO,
         end: endISO,

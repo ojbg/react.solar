@@ -27,17 +27,28 @@ const Forecast = {
   messages: {
     loading: 'Loading...',
     lastUpdate: 'Last Update:',
-    apiError: 'API Error'
+    apiError: 'API Error',
   },
   position: {
     latitude: -50.5,
     longitude: 49.5,
   },
   api: {
-    solarFlux: { var: 'av_swsfcdown', count: 9, interval: null, refTime: true },
-    sky: { var: 'av_ttl_cld', count: 9, refTime: true },
+    solarFlux: {
+      var: 'av_swsfcdown',
+      count: 9,
+      interval: null,
+      refTime: true,
+      origin: 'dataset-details',
+    },
+    sky: {
+      var: 'av_ttl_cld',
+      count: 9,
+      refTime: true,
+      origin: 'dataset-details',
+    },
   },
-  forecastTimer: 1000*60*5
+  forecastTimer: 1000 * 60 * 5,
 };
 
 export { Forecast };
