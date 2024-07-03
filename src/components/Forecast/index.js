@@ -3,7 +3,7 @@ import config from 'config';
 import Card from 'components/Card';
 import './Forecast.css';
 import { Chart } from 'react-google-charts';
-import Api from 'services/ApiForecast';
+import { getWeatherForecast } from 'services/ApiForecast';
 import { Forecast as constants } from 'constants/Forecast';
 
 const Forecast = () => {
@@ -87,10 +87,7 @@ const Forecast = () => {
   useEffect(() => {
     async function getSolarFlux(time) {
       const data = [];
-      data.push([
-        constants.charts.solarFlux.xTitle,
-        constants.charts.solarFlux.yTitle,
-      ]);
+      data.push([constants.charts.solarFlux.xTitle, constants.charts.solarFlux.yTitle]);
 
       const params = {
         lon: constants.position.longitude,
@@ -106,7 +103,7 @@ const Forecast = () => {
 
       try {
         setIsError(false);
-        const results = await Api.getWeatherForecast(params);
+        const results = await getWeatherForecast(params);
 
         for (let i = 0; i < results.data.entries.length; i++) {
           const time = new Date(results.data.entries[i].axes.time).getHours();
@@ -138,12 +135,11 @@ const Forecast = () => {
 
       try {
         setIsError(false);
-        const results = await Api.getWeatherForecast(params);
+        const results = await getWeatherForecast(params);
 
         for (let i = 0; i < results.data.entries.length; i++) {
           const time = new Date(results.data.entries[i].axes.time).getHours();
-          const sky_cloud_coverage =
-            results.data.entries[i].data.av_ttl_cld * 100;
+          const sky_cloud_coverage = results.data.entries[i].data.av_ttl_cld * 100;
 
           data.push([`${time}`, sky_cloud_coverage]);
         }
@@ -157,16 +153,12 @@ const Forecast = () => {
     function getISOTime(hours = 24) {
       const start = new Date();
       // Fix UTC to use native date ISO conversion
-      const startISO = new Date(
-        start.getTime() - start.getTimezoneOffset() * 6e4
-      ).toISOString();
+      const startISO = new Date(start.getTime() - start.getTimezoneOffset() * 6e4).toISOString();
 
       const end = new Date(start);
       end.setHours(end.getHours() + hours);
 
-      const endISO = new Date(
-        end.getTime() - end.getTimezoneOffset() * 6e4
-      ).toISOString();
+      const endISO = new Date(end.getTime() - end.getTimezoneOffset() * 6e4).toISOString();
 
       return {
         start: startISO,
