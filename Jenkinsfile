@@ -4,10 +4,10 @@ pipeline {
     environment {
         APP_URL = 'react.solar.no-labs.com'
         PROJECT_PATH = '/home/iser/apps'
-        SERVER_IP = '51.178.16.40'
+         SERVER_IP = '78.28.64.134'
         user='iser'
         remote="host=ssh://${user}@${SERVER_IP}"
-        credentials='iserLabs001'  
+        credentials='Liikva'  
         logPath='/home/iser/apps/logs'
         nginxPath='/etc/nginx/sites-available'
         temp='/home/iser/temp'
