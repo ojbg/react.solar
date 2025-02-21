@@ -2,6 +2,7 @@ version: '3.8'
 services:
   frontend:
     container_name: ${COMPOSE_PROJECT_NAME}_frontend
+    restart: always
     build:
       context: .
     ports:
